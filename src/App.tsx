@@ -13,6 +13,7 @@ import Turfs from "./pages/Turfs";
 import Tournaments from "./pages/Tournaments";
 import Login from "./pages/Login";
 
+// Create a client
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -21,17 +22,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="players" element={<Players />} />
-            <Route path="matches" element={<Matches />} />
-            <Route path="turfs" element={<Turfs />} />
-            <Route path="tournaments" element={<Tournaments />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="app-wrapper bg-purple-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="players" element={<Players />} />
+              <Route path="matches" element={<Matches />} />
+              <Route path="turfs" element={<Turfs />} />
+              <Route path="tournaments" element={<Tournaments />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

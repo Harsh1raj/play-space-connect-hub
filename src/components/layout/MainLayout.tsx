@@ -9,7 +9,7 @@ const MainLayout: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="flex h-full">
+    <div className="flex h-full bg-purple-50 dark:bg-gray-900">
       {!isMobile && <Sidebar />}
       <div className="flex-1 overflow-auto">
         <main className="pb-16 md:pb-0 min-h-screen">

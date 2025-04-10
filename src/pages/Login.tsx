@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+import { Eye, EyeOff, Mail, Phone, User, Pitch } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 const Login: React.FC = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [loginMethod, setLoginMethod] = useState<"email" | "phone">("email");
+  const [userType, setUserType] = useState<"player" | "turfOwner">("player");
 
   return (
     <div className="container max-w-md mx-auto py-12 px-4">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-cricket-green-dark mb-2">CricBuddies</h1>
+        <h1 className="text-3xl font-bold text-purple-700 dark:text-purple-400 mb-2">CricBuddies</h1>
         <p className="text-gray-600 dark:text-gray-300">Connect with cricket players and turfs</p>
       </div>
 
@@ -24,6 +25,35 @@ const Login: React.FC = () => {
           <p className="text-gray-500 dark:text-gray-400">Sign in to your account</p>
         </CardHeader>
         <CardContent>
+          <div className="mb-6">
+            <div className="flex justify-center mb-6">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-full inline-flex p-1 w-full max-w-xs">
+                <button
+                  className={`flex-1 px-4 py-2 rounded-full text-sm flex items-center justify-center gap-2 ${
+                    userType === "player" 
+                      ? "bg-purple-600 text-white" 
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                  onClick={() => setUserType("player")}
+                >
+                  <User className="h-4 w-4" />
+                  Player
+                </button>
+                <button
+                  className={`flex-1 px-4 py-2 rounded-full text-sm flex items-center justify-center gap-2 ${
+                    userType === "turfOwner" 
+                      ? "bg-purple-600 text-white" 
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                  onClick={() => setUserType("turfOwner")}
+                >
+                  <Pitch className="h-4 w-4" />
+                  Turf Owner
+                </button>
+              </div>
+            </div>
+          </div>
+          
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="login">Login</TabsTrigger>
@@ -37,7 +67,7 @@ const Login: React.FC = () => {
                     <button
                       className={`px-4 py-2 rounded-full text-sm ${
                         loginMethod === "email" 
-                          ? "bg-cricket-green-dark text-white" 
+                          ? "bg-purple-600 text-white" 
                           : "text-gray-700 dark:text-gray-300"
                       }`}
                       onClick={() => setLoginMethod("email")}
@@ -47,7 +77,7 @@ const Login: React.FC = () => {
                     <button
                       className={`px-4 py-2 rounded-full text-sm ${
                         loginMethod === "phone" 
-                          ? "bg-cricket-green-dark text-white" 
+                          ? "bg-purple-600 text-white" 
                           : "text-gray-700 dark:text-gray-300"
                       }`}
                       onClick={() => setLoginMethod("phone")}
@@ -96,14 +126,14 @@ const Login: React.FC = () => {
                   </button>
                 </div>
                 <div className="text-right mb-4">
-                  <a href="#" className="text-sm text-cricket-green-dark hover:underline">
+                  <a href="#" className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
                     Forgot password?
                   </a>
                 </div>
               </div>
 
-              <Button className="w-full bg-cricket-green-dark hover:bg-cricket-green-dark/90 mb-4">
-                Sign In
+              <Button className="w-full bg-purple-600 hover:bg-purple-700 mb-4">
+                Sign In as {userType === "player" ? "Player" : "Turf Owner"}
               </Button>
 
               <div className="relative my-6">
@@ -171,16 +201,16 @@ const Login: React.FC = () => {
                   <input 
                     type="checkbox" 
                     id="terms" 
-                    className="h-4 w-4 rounded border-gray-300 text-cricket-green-dark focus:ring-cricket-green-dark" 
+                    className="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-600" 
                   />
                   <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                    I agree to the <a href="#" className="text-cricket-green-dark hover:underline">Terms of Service</a> and <a href="#" className="text-cricket-green-dark hover:underline">Privacy Policy</a>
+                    I agree to the <a href="#" className="text-purple-600 dark:text-purple-400 hover:underline">Terms of Service</a> and <a href="#" className="text-purple-600 dark:text-purple-400 hover:underline">Privacy Policy</a>
                   </label>
                 </div>
               </div>
 
-              <Button className="w-full bg-cricket-green-dark hover:bg-cricket-green-dark/90 mb-4">
-                Create Account
+              <Button className="w-full bg-purple-600 hover:bg-purple-700 mb-4">
+                Create {userType === "player" ? "Player" : "Turf Owner"} Account
               </Button>
 
               <div className="relative my-6">
@@ -219,7 +249,7 @@ const Login: React.FC = () => {
       <div className="text-center mt-8">
         <p className="text-sm text-gray-600 dark:text-gray-400">
           By signing in or creating an account, you agree to our <br />
-          <a href="#" className="text-cricket-green-dark hover:underline">Terms of Service</a> and <a href="#" className="text-cricket-green-dark hover:underline">Privacy Policy</a>
+          <a href="#" className="text-purple-600 dark:text-purple-400 hover:underline">Terms of Service</a> and <a href="#" className="text-purple-600 dark:text-purple-400 hover:underline">Privacy Policy</a>
         </p>
       </div>
     </div>
