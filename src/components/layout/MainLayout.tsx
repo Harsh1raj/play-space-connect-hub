@@ -1,12 +1,32 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import BottomNav from "./BottomNav";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Sidebar from "./Sidebar";
+import { App } from "@capacitor/app";
 
 const MainLayout: React.FC = () => {
   const isMobile = useIsMobile();
+  
+  useEffect(() => {
+    // Handle hardware back button for Android
+    const backButtonListener = App.addListener('backButton', ({ canGoBack }) => {
+      if (canGoBack) {
+        window.history.back();
+      } else {
+        // Ask for confirmation before exiting the app
+        if (confirm("Are you sure you want to exit the app?")) {
+          App.exitApp();
+        }
+      }
+    });
+
+    return () => {
+      // Clean up the listener when component unmounts
+      backButtonListener.remove();
+    };
+  }, []);
   
   return (
     <div className="flex h-full bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800">

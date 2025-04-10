@@ -2,8 +2,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Users, Calendar, MapPin, Trophy } from "lucide-react";
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 const BottomNav: React.FC = () => {
+  const triggerHapticFeedback = async () => {
+    try {
+      await Haptics.impact({ style: ImpactStyle.Light });
+    } catch (error) {
+      console.error('Haptics not available', error);
+    }
+  };
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-purple-100 dark:bg-gray-800/90 dark:border-gray-700 shadow-lg z-10">
       <div className="grid grid-cols-5 h-16">
@@ -16,6 +25,7 @@ const BottomNav: React.FC = () => {
                 : "text-gray-500 dark:text-gray-400"
             }`
           }
+          onClick={triggerHapticFeedback}
         >
           {({ isActive }) => (
             <>
@@ -35,6 +45,7 @@ const BottomNav: React.FC = () => {
                 : "text-gray-500 dark:text-gray-400"
             }`
           }
+          onClick={triggerHapticFeedback}
         >
           {({ isActive }) => (
             <>
@@ -54,6 +65,7 @@ const BottomNav: React.FC = () => {
                 : "text-gray-500 dark:text-gray-400"
             }`
           }
+          onClick={triggerHapticFeedback}
         >
           {({ isActive }) => (
             <>
@@ -73,6 +85,7 @@ const BottomNav: React.FC = () => {
                 : "text-gray-500 dark:text-gray-400"
             }`
           }
+          onClick={triggerHapticFeedback}
         >
           {({ isActive }) => (
             <>
@@ -92,6 +105,7 @@ const BottomNav: React.FC = () => {
                 : "text-gray-500 dark:text-gray-400"
             }`
           }
+          onClick={triggerHapticFeedback}
         >
           {({ isActive }) => (
             <>
